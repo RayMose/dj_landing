@@ -1,0 +1,34 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Kygo - Official Website"
+theme = "kygo-neon"
+
+[params]
+  description = "Official website of DJ and music producer Kygo"
+  author = "Kygo"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Music"
+    url = "/music/"
+    weight = 2
+  [[menu.main]]
+    name = "Events"
+    url = "/events/"
+    weight = 3
+  [[menu.main]]
+    name = "Gallery"
+    url = "/gallery/"
+    weight = 4
+  [[menu.main]]
+    name = "Merch"
+    url = "/merch/"
+    weight = 5
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 6
