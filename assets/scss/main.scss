@@ -1,0 +1,31 @@
+// Variables
+$background-color: #121212;
+$text-color: #ffffff;
+$neon-blue: #00ffff;
+$neon-pink: #ff00ff;
+
+body {
+    background-color: $background-color;
+    color: $text-color;
+    font-family: 'Arial', sans-serif;
+}
+
+// Neon text effect
+@mixin neon-text($color) {
+    color: $color;
+    text-shadow: 0 0 5px $color, 0 0 10px $color, 0 0 15px $color, 0 0 20px $color;
+}
+
+h1, h2, h3 {
+    @include neon-text($neon-blue);
+}
+
+a {
+    @include neon-text($neon-pink);
+    text-decoration: none;
+    &:hover {
+        text-shadow: 0 0 10px $neon-pink, 0 0 20px $neon-pink, 0 0 30px $neon-pink, 0 0 40px $neon-pink;
+    }
+}
+
+// Add more styles as needed
