@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kygo - Official Website</title>
-    <meta name="description" content="">
+    <meta name="description" content="Welcome to the official website of Kygo, world-renowned DJ and music producer">
     
     <link rel="stylesheet" href="/scss/main.min.css">
 </head>
@@ -32,10 +32,7 @@
     <main>
         
 <div class="hero">
-    <video autoplay muted loop id="bgVideo">
-        <source src="/videos/kygo-performance.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <div id="ytPlayer"></div>
     <div class="hero-content">
         <h1>KYGO</h1>
         <p>Tropical House Maestro</p>
@@ -66,6 +63,33 @@
     <h2>Connect with Kygo</h2>
     
 </section>
+
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('ytPlayer', {
+            videoId: 'MFEv7-w7_vE', 
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0,
+                'showinfo': 0,
+                'rel': 0,
+                'loop': 1,
+                'playlist': 'MFEv7-w7_vE' 
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.mute(); 
+        event.target.playVideo(); 
+    }
+</script>
 
     </main>
     <footer>

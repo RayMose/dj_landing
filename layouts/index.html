@@ -1,9 +1,6 @@
 {{ define "main" }}
 <div class="hero">
-    <video autoplay muted loop id="bgVideo">
-        <source src="/videos/kygo-performance.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <div id="ytPlayer"></div>
     <div class="hero-content">
         <h1>KYGO</h1>
         <p>Tropical House Maestro</p>
@@ -34,4 +31,31 @@
     <h2>Connect with Kygo</h2>
     <!-- Add social media feed integration here -->
 </section>
+
+<!-- YouTube API Script -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('ytPlayer', {
+            videoId: 'MFEv7-w7_vE', // Replace with your YouTube video ID
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0,
+                'showinfo': 0,
+                'rel': 0,
+                'loop': 1,
+                'playlist': 'MFEv7-w7_vE' // Same as videoId, required for looping
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.mute(); // Mute the video
+        event.target.playVideo(); // Autoplay the video
+    }
+</script>
 {{ end }}

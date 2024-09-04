@@ -34,7 +34,7 @@ a {
     height: 100vh;
     overflow: hidden;
 
-    #bgVideo {
+    #ytPlayer {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -44,14 +44,14 @@ a {
         height: auto;
         transform: translateX(-50%) translateY(-50%);
         z-index: -1;
+        pointer-events: none; // Prevents clicking on the video
     }
 
     .hero-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
+        z-index: 1;
         text-align: center;
+        padding-top: 40vh; // Adjust as needed
 
         h1 {
             font-size: 6rem;
