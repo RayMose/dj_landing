@@ -10,36 +10,53 @@
     <link rel="stylesheet" href="/scss/main.min.css">
 </head>
 <body>
-    <header>
-    <nav>
-        <ul>
-            
-            <li><a href="/">Home</a></li>
-            
-            <li><a href="/music/">Music</a></li>
-            
-            <li><a href="/events/">Events</a></li>
-            
-            <li><a href="/gallery/">Gallery</a></li>
-            
-            <li><a href="/merch/">Merch</a></li>
-            
-            <li><a href="/about/">About</a></li>
-            
-        </ul>
-    </nav>
+    <header class="site-header">
+    <div class="container">
+        <a href="/" class="logo">KYGO</a>
+        <nav class="main-nav">
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-list">
+                
+                
+                <li><a href="/" class="">Home</a></li>
+                
+                <li><a href="/music/" class="">Music</a></li>
+                
+                <li><a href="/events/" class="">Events</a></li>
+                
+                <li><a href="/gallery/" class="">Gallery</a></li>
+                
+                <li><a href="/merch/" class="">Merch</a></li>
+                
+                <li><a href="/about/" class="">About</a></li>
+                
+            </ul>
+        </nav>
+    </div>
 </header>
+
+<script>
+document.querySelector('.menu-toggle').addEventListener('click', function() {
+    this.classList.toggle('active');
+    document.querySelector('.nav-list').classList.toggle('active');
+});
+</script>
     <main>
         
 <div class="hero">
     <div id="ytPlayer"></div>
     <div class="hero-content">
-        <h1>KYGO</h1>
-        <p>Tropical House Maestro</p>
+        
+        
         <div class="cta-buttons">
             <a href="/music" class="cta-button">Listen to Latest Tracks</a>
             <a href="/events" class="cta-button">View Tour Dates</a>
         </div>
+        <p>Tropical House Maestro</p>
     </div>
 </div>
 
@@ -77,17 +94,44 @@
                 'showinfo': 0,
                 'rel': 0,
                 'loop': 1,
-                'playlist': 'MFEv7-w7_vE' 
+                'playlist': 'MFEv7-w7_vE', 
+                'mute': 1
             },
             events: {
-                'onReady': onPlayerReady
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
             }
         });
     }
 
     function onPlayerReady(event) {
-        event.target.mute(); 
-        event.target.playVideo(); 
+        event.target.playVideo();
+        resizeVideo();
+        window.addEventListener('resize', resizeVideo);
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            player.playVideo();
+        }
+    }
+
+    function resizeVideo() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        var videoRatio = 16/9;
+        var windowRatio = w/h;
+        var newWidth, newHeight;
+
+        if (windowRatio > videoRatio) {
+            newWidth = w;
+            newHeight = w / videoRatio;
+        } else {
+            newHeight = h;
+            newWidth = h * videoRatio;
+        }
+
+        player.setSize(newWidth, newHeight);
     }
 </script>
 

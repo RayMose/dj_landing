@@ -2,12 +2,13 @@
 <div class="hero">
     <div id="ytPlayer"></div>
     <div class="hero-content">
-        <h1>KYGO</h1>
-        <p>Tropical House Maestro</p>
+        
+        
         <div class="cta-buttons">
             <a href="/music" class="cta-button">Listen to Latest Tracks</a>
             <a href="/events" class="cta-button">View Tour Dates</a>
         </div>
+        <p>Tropical House Maestro</p>
     </div>
 </div>
 
@@ -45,17 +46,44 @@
                 'showinfo': 0,
                 'rel': 0,
                 'loop': 1,
-                'playlist': 'MFEv7-w7_vE' // Same as videoId, required for looping
+                'playlist': 'MFEv7-w7_vE', // Same as videoId, required for looping
+                'mute': 1
             },
             events: {
-                'onReady': onPlayerReady
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
             }
         });
     }
 
     function onPlayerReady(event) {
-        event.target.mute(); // Mute the video
-        event.target.playVideo(); // Autoplay the video
+        event.target.playVideo();
+        resizeVideo();
+        window.addEventListener('resize', resizeVideo);
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            player.playVideo();
+        }
+    }
+
+    function resizeVideo() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        var videoRatio = 16/9;
+        var windowRatio = w/h;
+        var newWidth, newHeight;
+
+        if (windowRatio > videoRatio) {
+            newWidth = w;
+            newHeight = w / videoRatio;
+        } else {
+            newHeight = h;
+            newWidth = h * videoRatio;
+        }
+
+        player.setSize(newWidth, newHeight);
     }
 </script>
 {{ end }}
