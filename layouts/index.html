@@ -2,24 +2,71 @@
 <div class="hero">
     <div id="ytPlayer"></div>
     <div class="hero-content">
-        
-        
+        <h1>KYGO</h1>
+        <p>Tropical House Maestro</p>
         <div class="cta-buttons">
             <a href="/music" class="cta-button">Listen to Latest Tracks</a>
             <a href="/events" class="cta-button">View Tour Dates</a>
         </div>
-        <p>Tropical House Maestro</p>
     </div>
 </div>
 
-<section class="featured-content">
-    <div class="latest-release">
-        <h2>Latest Release</h2>
-        <!-- Add content for the latest release -->
+<section class="event-schedule">
+    <div class="container">
+        <h2>Event Schedule</h2>
+        <div class="upcoming-events">
+            <h3>Upcoming Tour Dates</h3>
+            <ul class="event-list">
+                {{ range first 5 .Site.Data.events.upcoming }}
+                <li class="event-item">
+                    <div class="event-date">{{ .date }}</div>
+                    <div class="event-details">
+                        <h4>{{ .name }}</h4>
+                        <p>{{ .location }}</p>
+                    </div>
+                    <a href="{{ .ticketLink }}" class="btn btn-ticket" target="_blank">Buy Tickets</a>
+                </li>
+                {{ end }}
+            </ul>
+            <a href="/events" class="btn btn-more">View All Events</a>
+        </div>
+        <div class="past-events">
+            <h3>Past Performances</h3>
+            <div class="event-gallery">
+                {{ range first 6 .Site.Data.events.past }}
+                <div class="event-card">
+                    <img src="{{ .image }}" alt="{{ .name }}">
+                    <div class="event-card-content">
+                        <h4>{{ .name }}</h4>
+                        <p>{{ .date }}</p>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+            <a href="/events#past" class="btn btn-more">View All Past Events</a>
+        </div>
     </div>
-    <div class="upcoming-events">
-        <h2>Upcoming Events</h2>
-        <!-- Add content for upcoming events -->
+</section>
+
+<section class="media-gallery">
+    <div class="container">
+        <h2>Photo & Video Gallery</h2>
+        <div class="gallery-grid">
+            {{ range first 6 .Site.Data.media }}
+            <div class="gallery-item {{ if eq .type "video" }}video-item{{ else }}photo-item{{ end }}">
+                {{ if eq .type "video" }}
+                <div class="video-wrapper" data-video-id="{{ .videoId }}">
+                    <img src="{{ .thumbnail }}" alt="{{ .caption }}">
+                    <div class="play-button"></div>
+                </div>
+                {{ else }}
+                <img src="{{ .src }}" alt="{{ .caption }}">
+                {{ end }}
+                <p class="caption">{{ .caption }}</p>
+            </div>
+            {{ end }}
+        </div>
+        <a href="/gallery" class="btn btn-more">View Full Gallery</a>
     </div>
 </section>
 
