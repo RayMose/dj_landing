@@ -1,0 +1,44 @@
+{{ define "main" }}
+<section class="about-hero">
+    <div class="container">
+        <h1>About Kygo</h1>
+    </div>
+</section>
+
+<section class="bio">
+    <div class="container">
+        <div class="bio-content">
+            {{ .Content }}
+        </div>
+        <div class="bio-sidebar">
+            <img src="/images/kygo-profile.jpg" alt="Kygo" class="profile-image">
+            <h3>Quick Facts</h3>
+            <ul class="quick-facts">
+                <li><strong>Born:</strong> September 11, 1991</li>
+                <li><strong>Origin:</strong> Bergen, Norway</li>
+                <li><strong>Genres:</strong> Tropical House, EDM</li>
+                <li><strong>Instruments:</strong> Piano, Synthesizer</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="achievements">
+    <div class="container">
+        <h2>Achievements</h2>
+        <ul class="achievement-list">
+            {{ range .Params.achievements }}
+            <li>{{ . }}</li>
+            {{ end }}
+        </ul>
+    </div>
+</section>
+
+<section class="press-kit">
+    <div class="container">
+        <h2>Press Kit</h2>
+        <p>Download Kygo's official press kit for high-resolution images, biography, and more.</p>
+        <a href="/downloads/kygo-press-kit.zip" class="btn btn-download">Download Press Kit</a>
+    </div>
+</section>
+{{ end }}
